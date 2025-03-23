@@ -1,6 +1,7 @@
 from time import sleep
 
 from Task import Task
+import os
 
 
 def add(taskList: list):
@@ -69,9 +70,17 @@ def sortTasks(taskList: list):
     list.sort(key=lambda task: task.priority, reverse=True)
 
 def exit(taskList: list):
-    with open("tasks.txt", "x") as file:
-        for task in taskList:
-            file.write(f"{task.title}#{task.description}#{task.priority}#{task.done}\n")
+    try:
+        with open("tasks.txt", "x") as file:
+            for task in taskList:
+                file.write(f"{task.title}#{task.description}#{task.priority}#{task.done}\n")
+            print(f"Tasks saved in {os.path} \/tasks.txt \n")
+    except FileExistsError:
+        with open("tasks.txt", "a") as file:
+            for task in taskList:
+                file.write(f"{task.title}#{task.description}#{task.priority}#{task.done}\n")
+            print(f"Tasks saved in {os.path.abspath('tasks.txt')}\n")
+
 
 
 def openFromFile(taskList: list):
@@ -108,8 +117,8 @@ def menu(taskList: list):
             elif action == "view" or action == "5":
                 viewTasks(taskList)
             elif action == "exit"or action == "6":
-                print("Goodbye")
                 exit(taskList)
+                print("Goodbye")
                 break
 
 def main():
