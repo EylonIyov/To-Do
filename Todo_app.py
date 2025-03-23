@@ -68,6 +68,15 @@ def viewTasks(taskList: list):
 def sortTasks(taskList: list):
     list.sort(key=lambda task: task.priority, reverse=True)
 
+def exit(taskList: list):
+    with open("tasks.txt", "x") as file:
+        for task in taskList:
+            file.write(task.getTitle() + "\n")
+            file.write(task.getDescription() + "\n")
+            file.write(task.getPriority() + "\n")
+            file.write(task.getDescription() + "\n")
+            file.write("#### \n \n")
+
 def menu(taskList: list):
     while True:
         action = input("""What operation would you like to perform? \n 1. add \n 2. remove\n 3. update\n 4. mark\n 5. view\n 6. exit \n""")
@@ -90,6 +99,7 @@ def menu(taskList: list):
                 viewTasks(taskList)
             elif action == "exit"or action == "6":
                 print("Goodbye")
+                exit(taskList)
                 break
 
 def main():
