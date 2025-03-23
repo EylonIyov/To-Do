@@ -77,6 +77,12 @@ def exit(taskList: list):
             file.write(task.getDescription() + "\n")
             file.write("#### \n \n")
 
+def openFromFile():
+    filename = input("What is the file you would like to open? \n").strip()
+    try:
+        with open(filename, "r") as file:
+            for line in file:
+
 def menu(taskList: list):
     while True:
         action = input("""What operation would you like to perform? \n 1. add \n 2. remove\n 3. update\n 4. mark\n 5. view\n 6. exit \n""")
