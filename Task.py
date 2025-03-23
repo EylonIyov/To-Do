@@ -21,7 +21,7 @@ class Task:
     def mark_done(self):
         self.done = True
 
-    def mark_priority(self, priority: int):
+    def set_priority(self, priority: int):
         self.priority = priority;
 
     def getTitle(self):

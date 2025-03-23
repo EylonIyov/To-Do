@@ -71,17 +71,21 @@ def sortTasks(taskList: list):
 def exit(taskList: list):
     with open("tasks.txt", "x") as file:
         for task in taskList:
-            file.write(task.getTitle() + "\n")
-            file.write(task.getDescription() + "\n")
-            file.write(task.getPriority() + "\n")
-            file.write(task.getDescription() + "\n")
-            file.write("#### \n \n")
+            file.write(f"{task.title}#{task.description}#{task.priority}#{task.done}\n")
 
-def openFromFile():
+
+def openFromFile(taskList: list):
     filename = input("What is the file you would like to open? \n").strip()
     try:
         with open(filename, "r") as file:
             for line in file:
+                attributes_of_task = line.split("#")
+                task = Task(attributes_of_task[0], attributes_of_task[1], attributes_of_task[2])
+                if attributes_of_task[3] == "True":
+                    task.mark_done()
+                taskList.append(task)
+    except FileNotFoundError:
+        print("File not found\n")
 
 def menu(taskList: list):
     while True:
